@@ -1,46 +1,52 @@
-import React from 'react';
-import logo from './primereact-logo.png';
-import './App.css';
+import React, { useState } from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useHistory,
+    RouteComponentProps
+  } from "react-router-dom";
 
-import { Button } from 'primereact/button';
 
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
+import './App.css';
+import Login from './pages/Login';
+import DashboardMain from './pages/DashboardMain';
 
-interface Props {}
-interface State {
-    count: number;
-}
 
-class App extends React.Component<Props, State> {
-    
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            count: 0
-        };
-        this.increment = this.increment.bind(this);
+
+
+
+const App: React.FC = () => {
+    const [loggin,setLoggin] = useState(false);
+
+
+
+    const onLogin =(isLoggin:boolean)=>{
+          setLoggin(isLoggin);
     }
-    
-    increment() {
-        this.setState({
-            count: this.state.count + 1
-        });
-    }
-    
-    render() {
-        return (
-            <div className="App">
-                <div className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                </div>
-                <br/>
-                <Button label="PrimeReact" icon="pi pi-check" onClick={this.increment} />
-                <p>Number of Clicks:{this.state.count}</p>
-            </div>
-        );
-    }
+    return (
+        <Router>
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/login">
+            <Login onHandleLogin={onLogin}/>
+          </Route>
+          <Route path="/dashboard">
+            <DashboardMain/>
+          </Route>
+          <Route path="/">
+            {loggin ? <DashboardMain /> : <Login onHandleLogin={onLogin}/>}
+          </Route>
+        </Switch>
+      
+    </Router>
+    )
 }
 
 export default App;
