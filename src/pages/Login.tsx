@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { Password} from 'primereact/password';
 
 
 import 'primereact/resources/primereact.min.css';
@@ -19,25 +20,31 @@ const Login: React.FC<Props> = ({onHandleLogin}) => {
     const [usuario, setUsuario] = useState("");
     const [pass, setPass] = useState("");
     const history = useHistory<any>();
+    const [loggin,setLoggin] = useState(false);
 
     const onLogin = ()=>{
         console.log("hey")
         let username = "Admin";
         let passwd = "CLOBI2021";
         if(usuario == username && pass == passwd){
-            onHandleLogin(true);
+            setLoggin(true);
             setTimeout(()=>{
+                onHandleLogin(true);
+                setLoggin(false);
                 history.push("/dashboard")
-            },500)
+            },1500)
         }
     }
 
     const header = (
+        <>
         <img alt="Card" src="https://womancart.in/images/login-img-n.svg" />
+        </>
     );
     const footer = (
         <span className="">
             <Button onClick={onLogin} label="Entrar" icon="pi pi-sign-in" />
+            <img hidden={!loggin} src="https://www.bluechipexterminating.com/wp-content/uploads/2020/02/loading-gif-png-5.gif" width="30px" height="30px" />
         </span>
     );
     return (
@@ -57,7 +64,7 @@ const Login: React.FC<Props> = ({onHandleLogin}) => {
                                 <div className="p-col-12">
                                     <span className="p-input-icon-left">
                                         
-                                        <InputText value={pass} onChange={(e) => setPass(e.currentTarget.value)} placeholder="Contraseña" />
+                                        <Password  value={pass} onChange={(e) => setPass(e.currentTarget.value)} placeholder="Contraseña" />
                                     </span>
                                 </div>
                             </div>

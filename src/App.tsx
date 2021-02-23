@@ -34,12 +34,13 @@ const App: React.FC = () => {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/login">
-            <Login onHandleLogin={onLogin}/>
-          </Route>
-          <Route path="/dashboard">
+          
+          {loggin ? (<Route path="/dashboard">
             <DashboardMain/>
-          </Route>
+          </Route>): <Route path="/login">
+            <Login onHandleLogin={onLogin}/>
+          </Route>}
+          
           <Route path="/">
             {loggin ? <DashboardMain /> : <Login onHandleLogin={onLogin}/>}
           </Route>
