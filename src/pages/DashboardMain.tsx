@@ -126,14 +126,14 @@ const DashboardMain: React.FC = () => {
                         </div>
                         <br /><br />
                         <div className="p-grid">
-                            <div className="p-col-6">
+                            <div className="p-lg-6 p-md-12">
                                 <CustomBarChart
                                     labels={{ x: productosMasVendidos?.flatMap(x => x.product_name), y: productosMasVendidos?.flatMap(x => x.total_unidades_vendidas) }}
                                     title="Productos mas vendidos"
                                     type="bar"
                                 />
                             </div>
-                            <div className="p-col-6">
+                            <div className="p-lg-6 p-md-12">
                                 <CustomBarChart
                                     labels={{ x: mayorMargen?.flatMap(x => x.product_name), y: mayorMargen?.flatMap(x => x.total_ventas) }}
                                     title="Productos con mayor margen"
