@@ -33,6 +33,8 @@ const Login: React.FC<Props> = ({onHandleLogin}) => {
                 setLoggin(false);
                 history.push("/dashboard")
             },1500)
+        }else{
+            alert("Usuario y/o password incorrectos");
         }
     }
 
